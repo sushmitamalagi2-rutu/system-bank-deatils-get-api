@@ -44,4 +44,5 @@ output application/json
 		<logger level="INFO" doc:name="Logger" doc:id="13524fd4-d988-4bb2-a58f-6fd52d47d38b" message="#[payload]"/>
 		<logger level="DEBUG" doc:name="end" doc:id="4c6ddf45-607b-45eb-a9f9-0277cfb707b3" message='#["end of the flow"]' category="end"/>
 	</sub-flow>
+	
 </mule>
