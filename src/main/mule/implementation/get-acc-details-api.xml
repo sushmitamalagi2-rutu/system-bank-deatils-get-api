@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<sub-flow name="get-acc-details-apiSub_Flow" doc:id="b1935e57-8307-4e3b-8110-da7814b91157" >
+		<logger level="INFO" doc:name="START" doc:id="66729b77-a05c-4e7c-93d5-6f98a0adfadd" message='#["START OF THE FLOW"]' category="START"/>
+		<ee:transform doc:name="Transform Message" doc:id="b2408611-bb6e-47e5-9627-3791e139ce51" >
+			<ee:message >
+			</ee:message>
+			<ee:variables >
+				<ee:set-variable variableName="accNum" ><![CDATA[%dw 2.0
+output application/json
+---
+attributes.queryParams.accNum]]></ee:set-variable>
+				<ee:set-variable variableName="bankName" ><![CDATA[%dw 2.0
+output application/java
+---
+attributes.queryParams.bankName]]></ee:set-variable>
+				<ee:set-variable variableName="name" ><![CDATA[%dw 2.0
+output application/json
+---
+attributes.queryParams.name]]></ee:set-variable>
+				<ee:set-variable variableName="id" ><![CDATA[%dw 2.0
+output application/json
+---
+attributes.uriParams.id]]></ee:set-variable>
+			</ee:variables>
+		</ee:transform>
+		<ee:transform doc:name="Transform Message" doc:id="979b271f-6055-406b-8819-6c0cfc862a91" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{
+	"name":vars.name,
+	"accNum":vars.accNum as Number,
+	"bankName":vars.bankName,
+	"id" : vars.id 
+}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<logger level="INFO" doc:name="Logger" doc:id="13524fd4-d988-4bb2-a58f-6fd52d47d38b" message="#[payload]"/>
+		<logger level="DEBUG" doc:name="end" doc:id="4c6ddf45-607b-45eb-a9f9-0277cfb707b3" message='#["end of the flow"]' category="end"/>
+	</sub-flow>
+</mule>

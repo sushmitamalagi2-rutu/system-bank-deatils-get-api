@@ -1,0 +1,42 @@
+#%RAML 1.0
+title: bank-acc-details
+
+/getAccdetails/{id}:
+  get:
+    queryParameters:
+      name:
+        description: "retive the name of person"
+        type: string
+        required: false
+      accNum:
+        description: "retrive the account details" 
+        type: number
+        required: true
+        minimum: 3
+        maximum: 10
+      bankName:
+        description: "retrive the bank name"  
+        type: string
+    responses:
+      200:
+        body:
+          application/json:
+            example:
+              {
+                "name": "ANU",
+                "accNum": 1234567890,
+                "bankName": "HDFC"
+              }
+     
+  
+
+
+
+
+          
+    
+
+
+
+      
+      
